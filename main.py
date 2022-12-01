@@ -6,6 +6,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import cross_val_score
 from sklearn.metrics import accuracy_score
 
+# Read in Data
 df = pd.read_csv('data.csv')
 
 # TRAINING OPTIONS
@@ -15,11 +16,13 @@ df = pd.read_csv('data.csv')
 # train = pd.DataFrame({'occupancy': df["Occupancy"], 'humidity': df['humidity']})
 # train = pd.DataFrame({'occupancy': df["Occupancy"], 'co2': df['co2'], 'voc': df['VOC']})
 # train = pd.DataFrame({'occupancy': df["Occupancy"], 'co2': df['co2'], 'voc': df['VOC'], 'pm25': df['pm25']})
-train = pd.DataFrame({'occupancy': df["Occupancy"], 'co2': df['co2'], 'pm25': df['pm25'], 'humidity': df['humidity'], 'voc': df['VOC']})
-test = pd.DataFrame()
-y = train['occupancy']
+#train = pd.DataFrame({'occupancy': df["Occupancy"], 'co2': df['co2'], 'pm25': df['pm25'], 'humidity': df['humidity'], 'voc': df['VOC']})
+
 
 X = train
+y = train['occupancy']
+
+
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=1)
 
 estimatorRuns = 0
