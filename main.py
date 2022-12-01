@@ -22,13 +22,15 @@ df = pd.read_csv('data.csv')
 X = train
 y = train['occupancy']
 
-
+# Set Training/Test Data Set Sizes
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=1)
 
+# Set Number of Trees in Forest
 estimatorRuns = 0
 estimatorCount = 1100
 accuracies = []
 
+# Loop Random Forest and Average Results
 while estimatorRuns < 100:
     clf = RandomForestClassifier(n_estimators=estimatorCount, max_depth=6)
     clf.fit(X_train, y_train)
@@ -41,15 +43,19 @@ while estimatorRuns < 100:
                            verbose=0, warm_start=False)
 
     clf.predict(X_test)
+
     # Make prediction and check model's accuracy
     prediction = clf.predict(X_test)
     acc = accuracy_score(np.array(y_test), prediction)
     accuracies.append(acc)
     estimatorRuns += 1
 
+# Calculate Average Accuracy
 totalAccuracy = 0
 for accuracy in accuracies:
     totalAccuracy += accuracy
 averageAccuracy = totalAccuracy / len(accuracies)
+
+# Print Results
 print('Average Accuracy: ', averageAccuracy)
 print('This is how many estimators: ', estimatorCount)
